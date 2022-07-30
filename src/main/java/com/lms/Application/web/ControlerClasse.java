@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/classe")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 
 public class ControlerClasse {
 

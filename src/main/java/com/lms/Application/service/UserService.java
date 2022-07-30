@@ -1,6 +1,8 @@
 package com.lms.Application.service;
 
+import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.dao.UserRepository;
+import com.lms.Application.entities.Professeur;
 import com.lms.Application.entities.User;
 import com.lms.Application.iservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.util.List;
 public class UserService implements IUserService {
     @Autowired
     private UserRepository cltRep;
+    @Autowired
+    private ProfesseurRepository pr;
 
     @Override
     public List<User> getUsers() {
@@ -29,19 +33,18 @@ public class UserService implements IUserService {
         } catch (Exception e) {return null;}
     }
 
+
+
+
     @Override
-    public User saveUser(User frs) {
-        return cltRep.save(frs);
+    public Professeur saveUser(Professeur frs) {
+        return pr.save(frs);
     }
 
     @Override
-    public boolean deleteUser(String code) {
-        User frs = cltRep.findByUserName(code);
-        if(frs!=null) {
-            cltRep.delete(frs);
-            return true;
-        }
-        return false;
+    public void deleteUser(Long id) {
+        cltRep.deleteById(id);
+
     }
 
     @Override

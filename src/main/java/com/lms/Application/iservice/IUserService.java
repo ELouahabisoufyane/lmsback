@@ -1,5 +1,6 @@
 package com.lms.Application.iservice;
 
+import com.lms.Application.entities.Professeur;
 import com.lms.Application.entities.User;
 import org.springframework.data.domain.Page;
 
@@ -10,6 +11,6 @@ public interface IUserService {
     public Page<User> getUsers(int page, int size);
     public Page<User> getUsersByMotCle(String mc,int page, int size);
     public User getUser( String username );
-    public User saveUser(User u);
-    public boolean deleteUser(String username);
+    public  Professeur saveUser( Professeur u);
+    public void deleteUser(Long id);
 }
