@@ -1,5 +1,6 @@
 package com.lms.Application.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,9 @@ public class Niveau {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long Id;
 
-    String Titre;
+    String titre;
+    int level;
+    @JsonIgnore
     @ManyToOne
     Filiere filiere;
 }

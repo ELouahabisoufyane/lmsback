@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -21,14 +20,14 @@ public class Filiere {
     String deplome="master";
     String titre;
     @OneToMany(mappedBy = "filiere")
-    Set<Niveau> niveaus=new HashSet<Niveau>(); ;
+    List<Niveau> niveaux=new ArrayList<>();
 
     @OneToOne(mappedBy = "maFiliere")
     Professeur chefFiliere;
     @OneToMany(mappedBy = "filiere")
     Set<Etudiant> students=new HashSet<Etudiant>();
 
-public void setprof(Professeur p){
+    public void setprof(Professeur p){
     p.setMaFiliere(this);
     this.chefFiliere=p;
 }
@@ -36,5 +35,19 @@ public void setprof(Professeur p){
         this.chefFiliere.setMaFiliere(null);
         this.chefFiliere=null;
     }
+    public void addNiveau(Niveau n){
+        n.setFiliere(this);
+        niveaux.add(n);
+    }
+
+    public void removeNiveaux(){
+        Iterator<Niveau> iterator = this.niveaux.iterator();
+        while (iterator.hasNext()) {
+            Niveau f = iterator.next();
+            f.setFiliere(null);
+            iterator.remove();
+            }
+        }
+
 
 }

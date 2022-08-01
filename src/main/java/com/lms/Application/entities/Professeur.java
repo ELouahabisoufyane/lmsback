@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("PROF")
 public class Professeur extends User{
     private String CNEP;
-@JsonIgnore
+    @JsonIgnore
     @OneToOne
     Filiere maFiliere;
 }

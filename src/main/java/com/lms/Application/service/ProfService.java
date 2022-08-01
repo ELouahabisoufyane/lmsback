@@ -42,6 +42,10 @@ public class ProfService  {
 
 
     public void deleteProfesseur(Long id) {
+        Professeur p=pr.findById(id).get();
+
+        p.getMaFiliere().setChefFiliere(null);
+        p.setMaFiliere(null);
         pr.deleteById(id);
 
     }
