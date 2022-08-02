@@ -1,5 +1,6 @@
 package com.lms.Application.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,15 @@ public class Filiere {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
-    String deplome="master";
     String titre;
+    String deplome="master";
+    @JsonIgnore
     @OneToMany(mappedBy = "filiere")
     List<Niveau> niveaux=new ArrayList<>();
 
     @OneToOne(mappedBy = "maFiliere")
     Professeur chefFiliere;
-    @OneToMany(mappedBy = "filiere")
-    Set<Etudiant> students=new HashSet<Etudiant>();
+
 
     public void setprof(Professeur p){
     p.setMaFiliere(this);

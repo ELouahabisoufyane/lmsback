@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("select u from User u where u.username like :x order by u.username")
     public Page<User> findAllByMotCle(@Param("x")String motCle, Pageable pageable);
+
+    User findByUsernameAndPassword(String username, String password);
 }

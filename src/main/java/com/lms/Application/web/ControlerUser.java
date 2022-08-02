@@ -1,6 +1,6 @@
 package com.lms.Application.web;
 
-import com.lms.Application.entities.Classe;
+import com.lms.Application.dao.UserRepository;
 import com.lms.Application.entities.Professeur;
 import com.lms.Application.entities.User;
 import com.lms.Application.service.UserService;
@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class ControlerUser {
     @Autowired
     private final UserService us;
-
-    public ControlerUser(UserService us) {
+    private final UserRepository ur;
+    public ControlerUser(UserService us, UserRepository ur) {
         this.us = us;
+        this.ur = ur;
     }
 
 
@@ -42,6 +43,9 @@ public class ControlerUser {
     public void deleteUser(@PathVariable("id")  Long id){
         us.deleteUser(id);
     }
-
+    @PostMapping("/login")
+    User login(@RequestBody User u){
+        return ur.findByUsernameAndPassword(u.getUsername(),u.getPassword());
+    }
 
 }

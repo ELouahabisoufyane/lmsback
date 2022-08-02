@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -42,11 +43,11 @@ public class FiliereService {
             c.setprof(pr.findByUsername(n));}
              c=fr.save(c);
             if(c.getDeplome().compareTo("master")==0){
-                c.addNiveau(nr.save(new Niveau(null,"1ére année",1,null)));
+                c.addNiveau(nr.save(new Niveau(null,"1ére année",1,null,null)));
 
-                c.addNiveau( nr.save(new Niveau(null,"2éme année",2,null)));}
+                c.addNiveau( nr.save(new Niveau(null,"2éme année",2,null,null)));}
             else if (c.getDeplome().compareTo("licence")==0) {
-                c.addNiveau(nr.save(new Niveau(null,"1ére année",1,null)));
+                c.addNiveau(nr.save(new Niveau(null,"1ére année",1,null,null)));
             }
             return fr.save(c);
         }
@@ -131,6 +132,11 @@ public class FiliereService {
         f.setprof(pr.findByUsername(n));
         return fr.save(f);
     }
+    public List<Niveau> getNiveaux(Long id) {
+
+        return this.fr.findById(id).get().getNiveaux();
+    }
+
 
 
 }

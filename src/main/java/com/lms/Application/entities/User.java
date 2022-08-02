@@ -11,7 +11,7 @@ import java.util.*;
 @Entity@AllArgsConstructor@NoArgsConstructor@Data
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE",length = 6)
-public abstract class User implements Serializable {
+public  class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

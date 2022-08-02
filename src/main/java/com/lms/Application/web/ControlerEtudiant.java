@@ -62,7 +62,25 @@ public class ControlerEtudiant {
 
     }
 
+    @PostMapping("/adde/{id}")
+    Etudiant add(@RequestBody Etudiant s,@PathVariable("id")Long id){
+        System.out.println(id +"   "+s.getId()+"    "+s.getPassword()+"   "+s.getUsername());
+        return es.adde(s,id);
+    }
+    @PutMapping("/setDemanded")
+    void setDemande(@RequestBody Etudiant e){
 
+        es.setDemanded(e.getId());
+    }
+    @PutMapping("/setAffected")
+    void setAffected(@RequestBody Etudiant e){
 
+        es.setAffected(e.getId());
+    }
+    @PutMapping("/setRefused")
+    void setRefused(@RequestBody Etudiant e){
+
+        es.setrefused(e.getId());
+    }
 
 }

@@ -3,10 +3,14 @@ package com.lms.Application.web;
 import com.lms.Application.dao.FiliereRepository;
 import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.entities.Filiere;
+import com.lms.Application.entities.Niveau;
 import com.lms.Application.service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,6 +33,10 @@ public class ControlerFiliere {
     public Page<Filiere> showPage(@PathVariable("p") int currentPage){
         Page<Filiere> page = es.findPage(currentPage);
         return page;
+    }
+    @GetMapping("/getAll")
+    public List<Filiere> getAll(){
+        return fr.findAll();
     }
     @PostMapping("/add/{name}")
 
@@ -69,11 +77,10 @@ public class ControlerFiliere {
     public Filiere  addChef(@RequestBody Filiere cl,@PathVariable("name") String name) {
       return    es.updateChef(cl,name);
 
-
-
-
-
     }
-
+    @GetMapping("/get/{id}/Niveaux")
+    List<Niveau> getNiveaux(@PathVariable("id") Long id){
+        return es.getNiveaux(id);
+    }
 
 }
