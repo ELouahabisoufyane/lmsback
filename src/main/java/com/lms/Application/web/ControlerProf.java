@@ -1,9 +1,7 @@
 package com.lms.Application.web;
 
-import com.lms.Application.entities.Classe;
-import com.lms.Application.entities.Professeur;
-import com.lms.Application.entities.Role;
-import com.lms.Application.entities.User;
+import com.lms.Application.entities.*;
+import com.lms.Application.entities.Module;
 import com.lms.Application.service.ProfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,5 +66,14 @@ public class ControlerProf {
 
         return  ps.getProfs();
 
+    }
+
+    @GetMapping("/maFiliere/{id}")
+    public Filiere getFiliere(Long id){
+       return ps.getFiliere(id);
+    }
+    @GetMapping("/modules/{id}")
+    public List<Module> getModules(Long id){
+        return ps.getModules(id);
     }
 }
