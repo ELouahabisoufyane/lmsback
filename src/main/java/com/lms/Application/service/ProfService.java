@@ -4,6 +4,9 @@ import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Classe;
 import com.lms.Application.entities.Filiere;
+
+import com.lms.Application.entities.Module;
+
 import com.lms.Application.entities.Professeur;
 import com.lms.Application.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +84,14 @@ public class ProfService  {
     }
 
 
+    public Filiere getFiliere(Long id){
+        Professeur p=pr.findById(id).get();
+        return p.getMaFiliere();
+    }
+
+    public List<Module> getModules(Long id) {
+        Professeur p=pr.findById(id).get();
+        return p.getModules();
+    }
 
 }

@@ -22,22 +22,22 @@ public class DiplomeService {
         return DR.findById(id).get();
     }
 
-    @Override
+
     public List<Diplome> getAll() {
         return DR.findAll();
     }
 
-    @Override
+
     public void update(Diplome u) {
         DR.save(u);
     }
 
-    @Override
+
     public void remove(Diplome s) {
         DR.delete(s);
     }
 
-    @Override
+
     public Diplome add(Diplome n) {
        return DR.save(n);
     }
@@ -45,6 +45,7 @@ public class DiplomeService {
     public Diplome addFiliere(Filiere f,Long id) {
          Diplome d=DR.findById(id).get();
          f=FR.save(f);
+         return null;
     }
 
 
