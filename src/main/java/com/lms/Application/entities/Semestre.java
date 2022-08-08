@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,18 +14,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Niveau {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long Id;
+public class Semestre {
+    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String titre;
-    int level;
-    @JsonIgnore
+    int indece ;
     @ManyToOne
-    Promotion promotion;
-    @OneToMany(mappedBy = "niveau")
+            @JsonIgnore
+    Niveau niveau;
+    @OneToMany(mappedBy = "semestre")
     @JsonIgnore
-    List<Semestre> semestres= new ArrayList<Semestre>();
+    List<Module> modules=new ArrayList<Module>();
+    @Override
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -36,27 +37,28 @@ public class Niveau {
             return false;
         }
 
-        return this.getId() != null && this.getId().equals(((Niveau) obj).getId());
+        return this.getId() != null && this.getId().equals(((Semestre) obj).getId());
     }
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
 
-    public void addSemestre(Semestre s){
-        s.setNiveau(this);
-        this.semestres.add(s);
+    public void addModule(Module m){
+        m.setSemestre(this);
+        this.modules.add(m);
     }
-    public void removeSemestre(Semestre s){
-        s.setNiveau(this);
-        this.semestres.remove(s);
+    public void removeModule(Module m){
+        m.setSemestre(null);
+        this.modules.remove(m);
     }
     public void removeSemestres(){
-        Iterator<Semestre> iterator = this.semestres.iterator();
+        Iterator<Module> iterator = this.modules.iterator();
         while (iterator.hasNext()) {
-            Semestre f = iterator.next();
-            f.setNiveau(null);
+            Module f = iterator.next();
+            f.setSemestre(null);
             iterator.remove();
         }
     }
+
 }

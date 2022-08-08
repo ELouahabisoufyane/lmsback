@@ -7,7 +7,6 @@ import com.lms.Application.service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/filiere")
@@ -16,15 +15,12 @@ public class ControlerFiliere {
     private final  FiliereService es;
     private final ProfesseurRepository pr;
     private final FiliereRepository fr;
-
     public ControlerFiliere(FiliereService es, ProfesseurRepository pr, FiliereRepository fr) {
         this.es = es;
         this.pr = pr;
 
         this.fr = fr;
     }
-
-
     @GetMapping("/list/{p}")
     public Page<Filiere> showPage(@PathVariable("p") int currentPage){
         Page<Filiere> page = es.findPage(currentPage);
@@ -52,7 +48,6 @@ public class ControlerFiliere {
                                             @RequestParam(name = "page",defaultValue = "0") int page,
                                             @RequestParam(name = "size",defaultValue = "4") int size) {
         Page<Filiere> p=es.chercherFiliere(mc,page,size) ;
-
         return p;
     }
     @GetMapping("/findbyid/{id}")
@@ -63,16 +58,10 @@ public class ControlerFiliere {
     @GetMapping("/card")
     public Long card() {
         return  es.getcard();
-
     }
   @PostMapping("/addchef/{name}")
     public Filiere  addChef(@RequestBody Filiere cl,@PathVariable("name") String name) {
       return    es.updateChef(cl,name);
-
-
-
-
-
     }
 
 

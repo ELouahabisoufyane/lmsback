@@ -3,28 +3,28 @@ package com.lms.Application.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Niveau {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long Id;
-    String titre;
-    int level;
+public class Diplome {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String typeDiplome;
+    int indece;
+    @OneToMany(mappedBy = "diplome")
     @JsonIgnore
-    @ManyToOne
-    Promotion promotion;
-    @OneToMany(mappedBy = "niveau")
-    @JsonIgnore
-    List<Semestre> semestres= new ArrayList<Semestre>();
+    List<Filiere> filieres= new ArrayList<Filiere>();
+
+    @Override
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -36,26 +36,26 @@ public class Niveau {
             return false;
         }
 
-        return this.getId() != null && this.getId().equals(((Niveau) obj).getId());
+        return this.getId() != null && this.getId().equals(((Diplome) obj).getId());
     }
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
 
-    public void addSemestre(Semestre s){
-        s.setNiveau(this);
-        this.semestres.add(s);
+    public void addFiliere(Filiere f){
+        f.setDiplome(this);
+        this.filieres.add(f);
     }
-    public void removeSemestre(Semestre s){
-        s.setNiveau(this);
-        this.semestres.remove(s);
+    public void removeFiliere(Filiere f){
+        f.setDiplome(null);
+        this.filieres.remove(f);
     }
-    public void removeSemestres(){
-        Iterator<Semestre> iterator = this.semestres.iterator();
+    public void removeFilieres(){
+        Iterator<Filiere> iterator = this.filieres.iterator();
         while (iterator.hasNext()) {
-            Semestre f = iterator.next();
-            f.setNiveau(null);
+            Filiere f = iterator.next();
+            f.setDiplome(null);
             iterator.remove();
         }
     }

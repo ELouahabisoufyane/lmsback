@@ -6,16 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/niveau")
 public class ControlerNiveau {
-
     @Autowired
     private final NiveauService ns;
-
-
     public ControlerNiveau(NiveauService ns) {
         this.ns = ns;
     }
@@ -23,26 +19,16 @@ public class ControlerNiveau {
     public Niveau findEtudiantbyId(@PathVariable("id") Long id) {
         return ns.findEtudiantbyId(id);
     }
-
-
-
     @DeleteMapping("/delete/{id}")
     public void deleteNiveau(@PathVariable("id")  Long id) {
-
         ns.deleteNiveau(id);
-
     }
-
     @PostMapping("/add")
     public Niveau addNiveau(Niveau c) {
         return ns.addNiveau(c);
-
     }
     @GetMapping("/all")
     public List<Niveau> getNiveaux() {
         return ns.getNiveaux();
-
     }
-
-
 }

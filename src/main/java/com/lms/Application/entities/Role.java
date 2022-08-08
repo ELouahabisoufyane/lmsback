@@ -19,8 +19,6 @@ public class Role implements Serializable
     @NotNull
     @GeneratedValue
     Long id;
-
-
     private String role;
 
 

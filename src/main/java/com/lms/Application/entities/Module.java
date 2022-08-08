@@ -4,24 +4,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Module {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String titre;
 
-@Entity@AllArgsConstructor@NoArgsConstructor@Data
-@DiscriminatorValue("ETD")
-public class Etudiant extends User{
-    private String CNE;
-    @ManyToOne()@JsonIgnore
-    Promotion promotion;
-    @OneToMany(mappedBy = "etudiant")@JsonIgnore
-    List<Inscription> inscriptions=new ArrayList<Inscription>();
-    @Override
+    @ManyToOne
+    @JsonIgnore
+    Semestre semestre;
+    @ManyToOne()
+    @JsonIgnore
+    Professeur professeur;
+    @OneToMany(mappedBy = "module")
+    @JsonIgnore
+    List<Inscription> inscrits=new ArrayList<Inscription>();
+
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -33,7 +38,7 @@ public class Etudiant extends User{
             return false;
         }
 
-        return this.getId() != null && this.getId().equals(((Etudiant) obj).getId());
+        return this.getId() != null && this.getId().equals(((Module) obj).getId());
     }
     @Override
     public int hashCode() {
@@ -41,15 +46,15 @@ public class Etudiant extends User{
     }
 
     public void addInscription(Inscription i){
-        i.setEtudiant(this);
-        this.inscriptions.add(i);
+        i.setModule(this);
+        this.inscrits.add(i);
     }
     public void removeInscription(Inscription i){
-        i.setEtudiant(this);
-        this.inscriptions.remove(i);
+        i.setModule(this);
+        this.inscrits.remove(i);
     }
-    public void removeInscription(){
-        Iterator<Inscription> iterator = this.inscriptions.iterator();
+    public void removeInscriptions(){
+        Iterator<Inscription> iterator = this.inscrits.iterator();
         while (iterator.hasNext()) {
             Inscription f = iterator.next();
             f.setEtudiant(null);

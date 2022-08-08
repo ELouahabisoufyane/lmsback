@@ -25,10 +25,8 @@ public class FiliereService {
         this.pr = pr;
         this.nr = nr;
     }
-
-
     public Filiere addFiliere(Filiere c,String n) {
-        if(c.getId()==null ){
+      /*  if(c.getId()==null ){
             c=fr.save(c);
 
             if(n.compareTo("pas")==0 ){
@@ -63,31 +61,21 @@ public class FiliereService {
                 c.setprof(pr.findByUsername(n));}
             return fr.save(c);
 
-        }
-
+        }*/
+        return null;
     }
-
-
-
-
-
     public Page<Filiere> findPage(int pageNumber){
-
         return fr.findAll(PageRequest.of(pageNumber,6));
     }
     public Filiere findFilierebyId(Long id) {
         return fr.findById(id).get();
     }
-
-
     public Filiere updateFiliere(Filiere c) {
         return fr.save(c);
 
     }
-
-
     public void deleteFiliere(Long id) {
-        Filiere f=fr.findById(id).get();
+       /* Filiere f=fr.findById(id).get();
         List<Niveau> n=f.getNiveaux();
         for(Niveau nn:n){
             System.out.println(nn.getId());
@@ -103,34 +91,20 @@ public class FiliereService {
             f.getChefFiliere().setMaFiliere(null);
             fr.delete(f);
         }
-
-
-
+        */
     }
-
-
-
-
     public Page<Filiere> chercherFiliere(String mc, int page, int size) {
         return fr.chercher("%"+mc+"%",PageRequest.of(page,size, Sort.by("id") ) );
-
     }
-
     public Long getcard(){
-
-
         return fr.count();
     }
-
     public Professeur getChef(Filiere f){
         return f.getChefFiliere();
     }
     public Filiere updateChef(Filiere f,String n){
-
         f.updateprof(null);
         f.setprof(pr.findByUsername(n));
         return fr.save(f);
     }
-
-
 }

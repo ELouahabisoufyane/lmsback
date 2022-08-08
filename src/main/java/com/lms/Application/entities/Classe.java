@@ -14,6 +14,5 @@ import java.io.Serializable;
 public class Classe implements Serializable {
     @Id
     private Long id;
-
     private String name;
 }

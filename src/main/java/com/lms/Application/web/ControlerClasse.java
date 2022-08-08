@@ -19,25 +19,20 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 
 public class ControlerClasse {
-
     private final ClasseService cs;
-
     public ControlerClasse(ClasseService cs) {
         this.cs = cs;
     }
-
     @GetMapping("/all")
     public ResponseEntity<List<Classe>> getAllClasses () {
         List<Classe> classes=cs.getAllClasses();
         return new ResponseEntity<>(classes, HttpStatus.OK);
     }
-
     @PostMapping("/add")
     public  ResponseEntity<Classe> addClass(@RequestBody  Classe cl) {
         Classe newclasse=cs.addClass(cl);
         return new ResponseEntity<>(newclasse, HttpStatus.CREATED);
     }
-
     @PutMapping("/update")
     public  ResponseEntity<Classe> updateClass(@RequestBody Classe c) {
         Classe updateclasse=cs.addClass(c);

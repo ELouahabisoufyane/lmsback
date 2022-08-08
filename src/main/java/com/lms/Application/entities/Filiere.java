@@ -1,5 +1,6 @@
 package com.lms.Application.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +17,17 @@ public class Filiere {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
-    String deplome="master";
     String titre;
-    @OneToMany(mappedBy = "filiere")
-    List<Niveau> niveaux=new ArrayList<>();
 
     @OneToOne(mappedBy = "maFiliere")
+            @JsonIgnore
     Professeur chefFiliere;
+    @ManyToOne
+    @JsonIgnore
+    Diplome diplome;
     @OneToMany(mappedBy = "filiere")
-    Set<Etudiant> students=new HashSet<Etudiant>();
+    @JsonIgnore
+    List<Promotion> promotions =new ArrayList<Promotion>();
 
     public void setprof(Professeur p){
     p.setMaFiliere(this);
@@ -35,19 +37,37 @@ public class Filiere {
         this.chefFiliere.setMaFiliere(null);
         this.chefFiliere=null;
     }
-    public void addNiveau(Niveau n){
-        n.setFiliere(this);
-        niveaux.add(n);
-    }
-
-    public void removeNiveaux(){
-        Iterator<Niveau> iterator = this.niveaux.iterator();
-        while (iterator.hasNext()) {
-            Niveau f = iterator.next();
-            f.setFiliere(null);
-            iterator.remove();
-            }
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
         }
 
-
+        return this.getId() != null && this.getId().equals(((Etudiant) obj).getId());
+    }
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
+    }
+    public void addPromotion(Promotion p){
+        p.setFiliere(this);
+        this.promotions.add(p);
+    }
+    public void removePromotion(Promotion p){
+        p.setFiliere(this);
+        this.promotions.remove(p);
+    }
+    public void removePromotions(){
+        Iterator<Promotion> iterator = this.promotions.iterator();
+        while (iterator.hasNext()) {
+            Promotion f = iterator.next();
+            f.setFiliere(null);
+            iterator.remove();
+        }
+    }
 }
