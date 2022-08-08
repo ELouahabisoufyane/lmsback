@@ -3,6 +3,7 @@ package com.lms.Application.service;
 import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Classe;
+import com.lms.Application.entities.Filiere;
 import com.lms.Application.entities.Professeur;
 import com.lms.Application.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,13 @@ public class ProfService  {
 
     public void deleteProfesseur(Long id) {
         Professeur p=pr.findById(id).get();
-
+        if(p.getMaFiliere()!=null){
         p.getMaFiliere().setChefFiliere(null);
         p.setMaFiliere(null);
-        pr.deleteById(id);
+        pr.deleteById(id);}
+        else{
+            pr.deleteById(id);
+        }
 
     }
 
@@ -75,5 +79,7 @@ public class ProfService  {
     public List<Professeur> getProfs(){
         return this.pr.findAll();
     }
+
+
 
 }
