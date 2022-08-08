@@ -18,11 +18,6 @@ public class Filiere {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String titre;
-
-    String deplome="master";
-
-
-
     @OneToOne(mappedBy = "maFiliere")
             @JsonIgnore
     Professeur chefFiliere;
