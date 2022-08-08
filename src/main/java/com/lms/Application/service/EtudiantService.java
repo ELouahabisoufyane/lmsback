@@ -1,11 +1,11 @@
 package com.lms.Application.service;
 
 import com.lms.Application.dao.EtudiantRepository;
+import com.lms.Application.dao.NiveauRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Etudiant;
 
-import com.lms.Application.entities.Role;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lms.Application.entities.Niveau;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,9 +19,11 @@ public class EtudiantService {
 
     private final EtudiantRepository er;
     private final RoleRepository rr;
-    public EtudiantService(EtudiantRepository er, RoleRepository rr) {
+    private final NiveauRepository NR;
+    public EtudiantService(EtudiantRepository er, RoleRepository rr, NiveauRepository nr) {
         this.er = er;
         this.rr = rr;
+        NR = nr;
     }
 
 
@@ -64,4 +66,37 @@ public class EtudiantService {
 
         return er.count();
     }
+
+
+    public Etudiant adde(Etudiant s, Long id){
+        Niveau f=this.NR.findById(id).get();
+        s.getRoles().add(rr.findByRole("student"));
+        Etudiant ss=this.er.save(s);
+        f.addStudent(ss);
+        this.NR.save(f);
+
+        return this.er.findById(ss.getId()).get();
+    }
+
+
+    public void setDemanded(Long id) {
+        Etudiant s= this.er.findById(id).get();
+        s.setDemanded();
+        this.er.save(s);
+    }
+
+
+    public void setAffected(Long id) {
+        Etudiant s= this.er.findById(id).get();
+        s.setAffected();
+        this.er.save(s);
+    }
+
+
+    public void setrefused(Long id) {
+        Etudiant s= this.er.findById(id).get();
+        s.setRefused();
+        this.er.save(s);
+    }
+
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity@AllArgsConstructor@NoArgsConstructor@Data
 @DiscriminatorValue("PROF")
 public class Professeur extends User{
-    private String CNEP;
+    private String cin;
     @JsonIgnore
     @OneToOne
     Filiere maFiliere;

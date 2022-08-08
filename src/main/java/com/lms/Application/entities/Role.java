@@ -16,7 +16,7 @@ import java.util.Collection;
 public class Role implements Serializable
 {
     @Id
-    @NotNull
+
     @GeneratedValue
     Long id;
     private String role;
