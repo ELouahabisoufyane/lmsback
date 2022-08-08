@@ -16,30 +16,18 @@ import java.util.List;
 @Entity@AllArgsConstructor@NoArgsConstructor@Data
 @DiscriminatorValue("ETD")
 public class Etudiant extends User{
-<<<<<<< HEAD
-    private String CNE;
-    @ManyToOne()@JsonIgnore
+
+    @ManyToOne()
+    @JsonIgnore
     Promotion promotion;
     @OneToMany(mappedBy = "etudiant")@JsonIgnore
     List<Inscription> inscriptions=new ArrayList<Inscription>();
-=======
+
 
     private String cne;
-    private int etat=0;
-    @ManyToOne()
-    @JsonIgnore
-    private Niveau niveau;
-    public void setAffected(){
-        this.setEtat(1);
-    }
-    public void setDemanded(){
-        this.setEtat(0);
-    }
-    public void setRefused(){
-        this.setEtat(-1);
-    }
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
-    @Override
+
+
+
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -50,8 +38,7 @@ public class Etudiant extends User{
         if (getClass() != obj.getClass()) {
             return false;
         }
-<<<<<<< HEAD
-=======
+
 
         return this.getId() != null && this.getId().equals(((Etudiant) obj).getId());
     }
@@ -61,14 +48,11 @@ public class Etudiant extends User{
     }
 
 
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
 
-        return this.getId() != null && this.getId().equals(((Etudiant) obj).getId());
-    }
-    @Override
-    public int hashCode() {
-        return this.getClass().hashCode();
-    }
+
+
+
+
 
     public void addInscription(Inscription i){
         i.setEtudiant(this);

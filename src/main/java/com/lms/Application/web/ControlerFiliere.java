@@ -8,13 +8,11 @@ import com.lms.Application.service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-=======
 
 import java.util.List;
 import java.util.Set;
 
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/filiere")
@@ -74,14 +72,11 @@ public class ControlerFiliere {
   @PostMapping("/addchef/{name}")
     public Filiere  addChef(@RequestBody Filiere cl,@PathVariable("name") String name) {
       return    es.updateChef(cl,name);
-<<<<<<< HEAD
-=======
 
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
+
+
+
     }
-    @GetMapping("/get/{id}/Niveaux")
-    List<Niveau> getNiveaux(@PathVariable("id") Long id){
-        return es.getNiveaux(id);
-    }
+
 
 }

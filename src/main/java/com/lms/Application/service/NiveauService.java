@@ -45,28 +45,10 @@ public class NiveauService {
         return nr.findAll();
     }
 
-    public Set<Etudiant> getEtudiantByid(Long id){
-        Niveau n=nr.findById(id).get();
-        return n.getStudents();
-
-    }
 
 
-    public List<Etudiant> getRejectedStudents(Long id) {
-        return this.nr.findById(id).get().getExlcusedStudent();
-    }
 
-    public List<Etudiant> getDemandeStudents(Long id) {
-        return this.nr.findById(id).get().getDemandeStudent();
-    }
 
-    public List<Etudiant> getAffectedStudents(Long id) {
-        return this.nr.findById(id).get().getAffecteStudent();
-    }
-
-    public Set<Etudiant> getStudents(Long id) {
-        return this.nr.findById(id).get().getStudents();
-    }
 
 
 

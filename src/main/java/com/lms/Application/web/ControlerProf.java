@@ -69,7 +69,7 @@ public class ControlerProf {
     }
 
     @GetMapping("/maFiliere/{id}")
-    public Filiere getFiliere(Long id){
+    public Filiere getFiliere(@PathVariable("id")   Long id){
        return ps.getFiliere(id);
     }
     @GetMapping("/modules/{id}")

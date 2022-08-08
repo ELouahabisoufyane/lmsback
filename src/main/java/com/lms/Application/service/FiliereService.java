@@ -108,14 +108,8 @@ public class FiliereService {
         f.setprof(pr.findByUsername(n));
         return fr.save(f);
     }
-<<<<<<< HEAD
-=======
-    public List<Niveau> getNiveaux(Long id) {
-
-        return this.fr.findById(id).get().getNiveaux();
-    }
 
 
 
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
+
 }

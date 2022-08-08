@@ -18,27 +18,22 @@ public class Filiere {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String titre;
-<<<<<<< HEAD
-=======
+
     String deplome="master";
-    @JsonIgnore
-    @OneToMany(mappedBy = "filiere")
-    List<Niveau> niveaux=new ArrayList<>();
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
+
+
 
     @OneToOne(mappedBy = "maFiliere")
             @JsonIgnore
     Professeur chefFiliere;
-<<<<<<< HEAD
+
     @ManyToOne
     @JsonIgnore
     Diplome diplome;
     @OneToMany(mappedBy = "filiere")
     @JsonIgnore
     List<Promotion> promotions =new ArrayList<Promotion>();
-=======
 
->>>>>>> b4c111947e63a25d9bb8b56fbe2cca60270bf578
 
     public void setprof(Professeur p){
     p.setMaFiliere(this);

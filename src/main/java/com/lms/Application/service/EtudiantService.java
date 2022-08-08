@@ -68,35 +68,5 @@ public class EtudiantService {
     }
 
 
-    public Etudiant adde(Etudiant s, Long id){
-        Niveau f=this.NR.findById(id).get();
-        s.getRoles().add(rr.findByRole("student"));
-        Etudiant ss=this.er.save(s);
-        f.addStudent(ss);
-        this.NR.save(f);
-
-        return this.er.findById(ss.getId()).get();
-    }
-
-
-    public void setDemanded(Long id) {
-        Etudiant s= this.er.findById(id).get();
-        s.setDemanded();
-        this.er.save(s);
-    }
-
-
-    public void setAffected(Long id) {
-        Etudiant s= this.er.findById(id).get();
-        s.setAffected();
-        this.er.save(s);
-    }
-
-
-    public void setrefused(Long id) {
-        Etudiant s= this.er.findById(id).get();
-        s.setRefused();
-        this.er.save(s);
-    }
 
 }
