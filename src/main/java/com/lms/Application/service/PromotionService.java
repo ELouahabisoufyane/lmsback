@@ -4,7 +4,13 @@ import com.lms.Application.entities.Etudiant;
 import com.lms.Application.entities.Niveau;
 import com.lms.Application.entities.Promotion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
+@Service
+@Transactional
+
 public class PromotionService {
     @Autowired
     PromotionRepository PromR;

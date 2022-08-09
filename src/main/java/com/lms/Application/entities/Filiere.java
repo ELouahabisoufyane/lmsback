@@ -19,7 +19,7 @@ public class Filiere {
     Long id;
     String titre;
     @OneToOne(mappedBy = "maFiliere")
-            @JsonIgnore
+
     Professeur chefFiliere;
     @ManyToOne
     @JsonIgnore

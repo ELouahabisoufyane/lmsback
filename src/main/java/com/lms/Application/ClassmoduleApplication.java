@@ -38,36 +38,12 @@ public class ClassmoduleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-          Diplome m=new Diplome();
-		  m.setTypeDiplome("Master");
-		  m.setIndece(2);
-		  Filiere f1=new Filiere();
-		  f1.setTitre("data");
-		  f1=FR.save(f1);
-		Filiere f2=new Filiere();
-		f2.setTitre("MATH");
-		f2=FR.save(f2);
-		  m=DR.save(m);
-
-		  DS.addFiliere(f1,m.getId());
-		  DS.addFiliere(f2,m.getId());
-          Promotion p=new Promotion();
-		  fs.addPromotion(p,f1.getId());
 
 
 
 
-		/*Module mo=new Module();
-		mo.setTitre("java");
-		Module moo=new Module();
-		moo.setTitre("java");
-		Professeur p=new Professeur();
-		p.setUsername("ahmed");
-		p.setCin("z1111");
-		p=PR.save(p);
-		ps.affecterModule(moo,p.getId());
-		p=PR.findById(p.getId()).get();
-		System.out.println(p.getModules().size());*/
+
+
 	}
 
 }
