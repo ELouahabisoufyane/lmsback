@@ -21,20 +21,17 @@ public class Filiere {
     @OneToOne(mappedBy = "maFiliere")
             @JsonIgnore
     Professeur chefFiliere;
-
     @ManyToOne
     @JsonIgnore
     Diplome diplome;
     @OneToMany(mappedBy = "filiere")
     @JsonIgnore
     List<Promotion> promotions =new ArrayList<Promotion>();
-
-
     public void setprof(Professeur p){
     p.setMaFiliere(this);
     this.chefFiliere=p;
 }
-    public void updateprof(Professeur p){
+    public void resetProf(){
         this.chefFiliere.setMaFiliere(null);
         this.chefFiliere=null;
     }
@@ -48,7 +45,6 @@ public class Filiere {
         if (getClass() != obj.getClass()) {
             return false;
         }
-
         return this.getId() != null && this.getId().equals(((Etudiant) obj).getId());
     }
     @Override
@@ -56,6 +52,7 @@ public class Filiere {
         return this.getClass().hashCode();
     }
     public void addPromotion(Promotion p){
+
         p.setFiliere(this);
         this.promotions.add(p);
     }

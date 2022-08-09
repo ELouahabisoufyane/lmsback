@@ -1,5 +1,6 @@
 package com.lms.Application.service;
 
+import com.lms.Application.dao.ModuleRepository;
 import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Classe;
@@ -22,14 +23,12 @@ import java.util.List;
 @Transactional
 public class ProfService  {
     @Autowired
-    private final ProfesseurRepository pr;
+    private ProfesseurRepository pr;
     @Autowired
-    private final RoleRepository r;
+    private  RoleRepository r;
+    @Autowired
+    private  ModuleRepository mr;
 
-    public ProfService(ProfesseurRepository pr, RoleRepository r) {
-        this.pr = pr;
-        this.r = r;
-    }
     public Page<Professeur> findPage(int pageNumber){
 
         return pr.findAll(PageRequest.of(pageNumber,6));

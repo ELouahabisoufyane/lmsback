@@ -21,7 +21,6 @@ public class Module {
     @JsonIgnore
     Semestre semestre;
     @ManyToOne()
-    @JsonIgnore
     Professeur professeur;
     @OneToMany(mappedBy = "module")
     @JsonIgnore

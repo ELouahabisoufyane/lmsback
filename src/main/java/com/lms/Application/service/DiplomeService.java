@@ -45,6 +45,7 @@ public class DiplomeService {
     public Diplome addFiliere(Filiere f,Long id) {
          Diplome d=DR.findById(id).get();
          f=FR.save(f);
+         d.addFiliere(f);
          return null;
     }
 

@@ -28,12 +28,7 @@ public class Niveau {
 
     Promotion promotion;
     @OneToMany(mappedBy = "niveau")
-    @JsonIgnore
     List<Semestre> semestres= new ArrayList<Semestre>();
-
-
-
-
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -54,6 +49,7 @@ public class Niveau {
 
 
     public void addSemestre(Semestre s){
+
         s.setNiveau(this);
         this.semestres.add(s);
     }

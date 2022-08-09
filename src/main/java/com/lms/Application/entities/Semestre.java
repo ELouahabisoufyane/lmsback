@@ -23,7 +23,6 @@ public class Semestre {
             @JsonIgnore
     Niveau niveau;
     @OneToMany(mappedBy = "semestre")
-    @JsonIgnore
     List<Module> modules=new ArrayList<Module>();
     @Override
     public boolean equals(Object obj) {
@@ -52,7 +51,7 @@ public class Semestre {
         m.setSemestre(null);
         this.modules.remove(m);
     }
-    public void removeSemestres(){
+    public void removeModules(){
         Iterator<Module> iterator = this.modules.iterator();
         while (iterator.hasNext()) {
             Module f = iterator.next();

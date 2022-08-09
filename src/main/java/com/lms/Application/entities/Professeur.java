@@ -1,19 +1,14 @@
 package com.lms.Application.entities;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 @Entity@AllArgsConstructor@NoArgsConstructor@Data
 @DiscriminatorValue("PROF")
 public class Professeur extends User{
@@ -21,10 +16,9 @@ public class Professeur extends User{
     @JsonIgnore
     @OneToOne
     Filiere maFiliere;
-    @OneToMany(mappedBy = "professeur")
+    @OneToMany(mappedBy = "professeur",fetch = FetchType.EAGER)
     @JsonIgnore
     List<Module> modules=new ArrayList<Module>();
-
     @Override
     public boolean equals(Object obj) {
         if(obj == null) {
@@ -36,14 +30,12 @@ public class Professeur extends User{
         if (getClass() != obj.getClass()) {
             return false;
         }
-
         return this.getId() != null && this.getId().equals(((Professeur) obj).getId());
     }
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
-
     public void addModule(Module m){
         m.setProfesseur(this);
         this.modules.add(m);
@@ -60,14 +52,4 @@ public class Professeur extends User{
             iterator.remove();
         }
     }
-
-    public void addFiliere(Filiere f){
-        f.setChefFiliere(this);
-        this.setMaFiliere(f);
-    }
-    public void removeFiliere(){
-        this.getMaFiliere().setChefFiliere(null);
-        this.setMaFiliere(null);
-    }
-
 }

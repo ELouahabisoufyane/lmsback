@@ -4,6 +4,7 @@ import com.lms.Application.dao.FiliereRepository;
 import com.lms.Application.dao.ProfesseurRepository;
 import com.lms.Application.entities.Filiere;
 import com.lms.Application.entities.Niveau;
+import com.lms.Application.entities.Promotion;
 import com.lms.Application.service.FiliereService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,10 +37,10 @@ public class ControlerFiliere {
     public List<Filiere> getAll(){
         return fr.findAll();
     }
-    @PostMapping("/add/{name}")
+    @PostMapping("/add/{id}")
 
-    public Filiere addFiliere(@RequestBody Filiere cl,@PathVariable("name") String name) {
-        Filiere newuser=es.addFiliere(cl,name);
+    public Filiere addFiliere(@RequestBody Filiere cl,@PathVariable("id") Long id) {
+        Filiere newuser=es.addFiliere(cl,id);
         return newuser;
     }
 
@@ -69,14 +70,13 @@ public class ControlerFiliere {
     public Long card() {
         return  es.getcard();
     }
-  @PostMapping("/addchef/{name}")
-    public Filiere  addChef(@RequestBody Filiere cl,@PathVariable("name") String name) {
-      return    es.updateChef(cl,name);
-
-
-
-
+  @PostMapping("/addchef/{id}")
+    public Filiere  addChef(@RequestBody Filiere cl,@PathVariable("id") Long id) {
+      return    es.updateChef(cl,id);
     }
-
+  @GetMapping("/Promotions/{id}")
+    List<Promotion> GetPromotions(@PathVariable("id")Long id){
+       return es.getPromotions(id);
+  }
 
 }

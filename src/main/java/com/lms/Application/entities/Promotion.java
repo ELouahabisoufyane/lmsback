@@ -1,5 +1,4 @@
 package com.lms.Application.entities;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,17 +17,16 @@ import java.util.Locale;
 public class Promotion {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String anneeUniv= String.valueOf(LocalDate.now().getYear())+"/"+String.valueOf(LocalDate.now().getYear())+1;
+    String anneeUniv= String.valueOf(LocalDate.now().getYear())+"/"+String.valueOf(LocalDate.now().getYear()+1);
     @ManyToOne
+            @JsonIgnore
     Filiere filiere;
     @OneToMany(mappedBy = "promotion")
             @JsonIgnore
     List<Etudiant> etudiants=new ArrayList<Etudiant>();
     @OneToMany(mappedBy = "promotion")
-            @JsonIgnore
+    @JsonIgnore
     List<Niveau> niveaux= new ArrayList<Niveau>();
-
-
     @Override
     public boolean equals(Object obj) {
         if(obj == null) {
@@ -48,7 +45,6 @@ public class Promotion {
     public int hashCode() {
         return this.getClass().hashCode();
     }
-
     public void addEtudiant(Etudiant m){
         m.setPromotion(this);
         this.etudiants.add(m);
@@ -65,9 +61,6 @@ public class Promotion {
             iterator.remove();
         }
     }
-
-
-
     public void addNiveau(Niveau m){
         m.setPromotion(this);
         this.niveaux.add(m);
