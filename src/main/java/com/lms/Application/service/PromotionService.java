@@ -27,4 +27,7 @@ public class PromotionService {
         Promotion p= PromR.findById(idPromotion).get();
         return p.getNiveaux();
     }
+    public Promotion getPromotionById(Long id){
+        return  PromR.findById(id).get();
+    }
 }
