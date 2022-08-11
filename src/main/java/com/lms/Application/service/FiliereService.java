@@ -149,7 +149,7 @@ public class FiliereService {
          f.addPromotion(p);
         return f;
     }
-    void addEtudiant(Etudiant e,Long idFiliere){
+    public void addEtudiant(Etudiant e,Long idFiliere){
         Filiere f=fr.findById(idFiliere).get();
         f.getPromotions().get(0).addEtudiant(e);
     }

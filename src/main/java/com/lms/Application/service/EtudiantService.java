@@ -15,15 +15,16 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class EtudiantService {
-    private final FiliereService fs;
+   
     private final EtudiantRepository er;
     private final RoleRepository rr;
     private final NiveauRepository NR;
-    public EtudiantService(FiliereService fs, EtudiantRepository er, RoleRepository rr, NiveauRepository nr) {
-        this.fs = fs;
+    private final FiliereService fs;
+    public EtudiantService(EtudiantRepository er, RoleRepository rr, NiveauRepository nr, FiliereService fs) {
         this.er = er;
         this.rr = rr;
         NR = nr;
+        this.fs = fs;
     }
 
 

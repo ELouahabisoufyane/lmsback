@@ -23,7 +23,7 @@ public class Etudiant extends User{
     @OneToMany(mappedBy = "etudiant")@JsonIgnore
     List<Inscription> inscriptions=new ArrayList<Inscription>();
 
-
+    private boolean selec=false;
     private String cne;
 
 
