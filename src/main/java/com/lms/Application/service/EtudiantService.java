@@ -5,7 +5,6 @@ import com.lms.Application.dao.NiveauRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Etudiant;
 
-import com.lms.Application.entities.Niveau;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,11 +15,12 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class EtudiantService {
-
+    private final FiliereService fs;
     private final EtudiantRepository er;
     private final RoleRepository rr;
     private final NiveauRepository NR;
-    public EtudiantService(EtudiantRepository er, RoleRepository rr, NiveauRepository nr) {
+    public EtudiantService(FiliereService fs, EtudiantRepository er, RoleRepository rr, NiveauRepository nr) {
+        this.fs = fs;
         this.er = er;
         this.rr = rr;
         NR = nr;
@@ -48,10 +48,10 @@ public class EtudiantService {
     }
 
 
-    public Etudiant addEtudiant(Etudiant c,String role) {
-        c.addRole( rr.findByRole(role));
-        er.save(c);
-
+    public Etudiant addEtudiant(Etudiant c,Long idFiliere) {
+        c.addRole( rr.findByRole("student"));
+        c=er.save(c);
+        fs.addEtudiant(c,idFiliere);
         return c;
     }
 
@@ -66,7 +66,5 @@ public class EtudiantService {
 
         return er.count();
     }
-
-
 
 }

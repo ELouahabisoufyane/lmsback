@@ -26,10 +26,10 @@ public class ControlerEtudiant {
         Page<Etudiant> page = es.findPage(currentPage);
         return page;
     }
-    @PostMapping("/add/{role}")
+    @PostMapping("/add/{id}")
 
-    public Etudiant addEtudiant(@RequestBody Etudiant cl,@PathVariable("role") String role) {
-        Etudiant newuser=es.addEtudiant(cl,role);
+    public Etudiant addEtudiant(@RequestBody Etudiant cl,@PathVariable("id") Long idFiliere) {
+        Etudiant newuser=es.addEtudiant(cl,idFiliere);
         return newuser;
     }
 

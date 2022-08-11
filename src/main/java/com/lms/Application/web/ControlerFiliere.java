@@ -78,5 +78,8 @@ public class ControlerFiliere {
     List<Promotion> GetPromotions(@PathVariable("id")Long id){
        return es.getPromotions(id);
   }
-
+  @GetMapping("/addPromo/{id}")
+    Filiere addPromo(@PathVariable("id")Long id){
+        return es.addPromotion(id);
+  }
 }

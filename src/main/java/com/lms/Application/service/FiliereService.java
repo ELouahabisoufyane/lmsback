@@ -94,8 +94,9 @@ public class FiliereService {
         Filiere f=fr.findById(id).get();
         return f.getPromotions();
     }
-    public void addPromotion(Promotion p,Long idF){
+    public Filiere addPromotion(Long idF){
          Filiere f=fr.findById(idF).get();
+         Promotion p=new Promotion();
          p=promr.save(p);
         if(f.getDiplome().getIndece()==1){
             Niveau n=new Niveau();
@@ -146,6 +147,10 @@ public class FiliereService {
             p.addNiveau(n2);
         }
          f.addPromotion(p);
+        return f;
     }
-
+    void addEtudiant(Etudiant e,Long idFiliere){
+        Filiere f=fr.findById(idFiliere).get();
+        f.getPromotions().get(0).addEtudiant(e);
+    }
 }

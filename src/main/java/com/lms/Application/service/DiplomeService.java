@@ -48,7 +48,11 @@ public class DiplomeService {
          d.addFiliere(f);
          return null;
     }
-
+   public List<Filiere> getFilieres(Long id)
+   {
+      Diplome d= DR.findById(id).get();
+      return d.getFilieres();
+   }
 
 
 
