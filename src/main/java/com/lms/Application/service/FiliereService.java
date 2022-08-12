@@ -121,7 +121,7 @@ public class FiliereService {
          p=promr.save(p);
         if(f.getDiplome().getIndece()==1){
             Niveau n=GenerateNiveau("premiere annee",1);
-            if(f.getPromotions().get(0)!=null){
+            if(!f.getPromotions().isEmpty()){
             for (Semestre s:n.getSemestres()) {
                 ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(0).getSemestres().get(i));
                 i++;
@@ -129,7 +129,7 @@ public class FiliereService {
             i=0;}
         }else if(f.getDiplome().getIndece()==2){
             Niveau n1=GenerateNiveau("premiere annee",1);
-            if(f.getPromotions().get(0)!=null){
+            if(!f.getPromotions().isEmpty()){
             for (Semestre s:n1.getSemestres()) {
                 ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(0).getSemestres().get(i));
                 i++;
@@ -138,7 +138,7 @@ public class FiliereService {
             p.addNiveau(n1);
 
             Niveau n2=GenerateNiveau("deuxieme annee",2);
-            if(f.getPromotions().get(0)!=null){
+            if(!f.getPromotions().isEmpty()){
             for (Semestre s:n2.getSemestres()) {
                 ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(1).getSemestres().get(i));
                 i++;
