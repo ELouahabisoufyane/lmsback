@@ -18,13 +18,15 @@ public class FiliereService {
     private final PromotionRepository promr;
     private final NiveauRepository nr;
     private final SemestreRepository sr;
-    public FiliereService(FiliereRepository fr, ProfesseurRepository pr, PromotionRepository pr1, PromotionRepository promr, NiveauRepository nr, SemestreRepository sr) {
+    private final SemestreService ss;
+    public FiliereService(FiliereRepository fr, ProfesseurRepository pr, PromotionRepository pr1, PromotionRepository promr, NiveauRepository nr, SemestreRepository sr, SemestreService ss) {
         this.fr = fr;
         this.profr = pr;
         this.promr = promr;
 
         this.nr = nr;
         this.sr = sr;
+        this.ss = ss;
     }
     public Filiere addFiliere(Filiere c,Long idProf) {
       if(c.getId()==null ){
@@ -94,56 +96,50 @@ public class FiliereService {
         Filiere f=fr.findById(id).get();
         return f.getPromotions();
     }
+    private Niveau GenerateNiveau(String titre,int level){
+        Niveau n=new Niveau();
+        n.setTitre(titre);
+        n.setLevel(level);
+        n=nr.save(n);
+        for (int i=1;i<=2;i++){
+        n.addSemestre(GenerateSmestre(i));
+        }
+        return n;
+    }
+
+    private Semestre GenerateSmestre(int indece) {
+        Semestre s=new Semestre();
+        s.setTitre("Semestre "+indece);
+        s.setIndece(indece);
+        return sr.save(s);
+    }
+
     public Filiere addPromotion(Long idF){
+        int i=0;
          Filiere f=fr.findById(idF).get();
          Promotion p=new Promotion();
          p=promr.save(p);
         if(f.getDiplome().getIndece()==1){
-            Niveau n=new Niveau();
-            n.setTitre("premiere annee");
-            n.setLevel(1);
-            n=nr.save(n);
-            Semestre s1=new Semestre();
-            s1.setTitre("Semestre 1");
-            s1.setIndece(1);
-            s1=sr.save(s1);
-            Semestre s2=new Semestre();
-            s2.setTitre("Semestre 2");
-            s2.setIndece(2);
-            s2=sr.save(s2);
-            n.addSemestre(s1);
-            n.addSemestre(s2);
-            p.addNiveau(n);
+            Niveau n=GenerateNiveau("premiere annee",1);
+            for (Semestre s:n.getSemestres()) {
+                ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(0).getSemestres().get(i));
+                i++;
+            }
+            i=0;
         }else if(f.getDiplome().getIndece()==2){
-            Niveau n=new Niveau();
-            n.setTitre("premiere annee");
-            n.setLevel(1);
-            n=nr.save(n);
-            Semestre s1=new Semestre();
-            s1.setTitre("Semestre 1");
-            s1.setIndece(1);
-            s1=sr.save(s1);
-            Semestre s2=new Semestre();
-            s2.setTitre("Semestre 2");
-            s2.setIndece(2);
-            s2=sr.save(s2);
-            n.addSemestre(s1);
-            n.addSemestre(s2);
-            Niveau n2=new Niveau();
-            n2.setTitre("deuxieme annee");
-            n2.setLevel(2);
-            n2=nr.save(n2);
-            Semestre s3=new Semestre();
-            s3.setTitre("Semestre 1");
-            s3.setIndece(1);
-            s3=sr.save(s3);
-            Semestre s4=new Semestre();
-            s4.setTitre("Semestre 2");
-            s4.setIndece(2);
-            s4=sr.save(s4);
-            n2.addSemestre(s3);
-            n2.addSemestre(s4);
-            p.addNiveau(n);
+            Niveau n1=GenerateNiveau("premiere annee",1);
+            for (Semestre s:n1.getSemestres()) {
+                ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(0).getSemestres().get(i));
+                i++;
+            }
+            i=0;
+            p.addNiveau(n1);
+
+            Niveau n2=GenerateNiveau("deuxieme annee",2);
+            for (Semestre s:n2.getSemestres()) {
+                ss.CloneModules(s,f.getPromotions().get(0).getNiveaux().get(1).getSemestres().get(i));
+                i++;
+            }
             p.addNiveau(n2);
         }
          f.addPromotion(p);

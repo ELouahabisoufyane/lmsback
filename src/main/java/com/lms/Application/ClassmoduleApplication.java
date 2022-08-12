@@ -22,6 +22,8 @@ public class ClassmoduleApplication implements CommandLineRunner {
 	FiliereService fs;
 	@Autowired
 	DiplomeService DS;
+	@Autowired
+	ModuleRepository mr;
 	public ClassmoduleApplication(DiplomeRepository pr, FiliereRepository fr, ProfesseurRepository mr, ModuleRepository mr1) {
 		this.DR = pr;
 		this.FR=fr;
@@ -39,11 +41,5 @@ public class ClassmoduleApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-
-
-
-
-
 	}
-
 }

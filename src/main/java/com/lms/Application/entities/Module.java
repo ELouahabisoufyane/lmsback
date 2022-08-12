@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Module {
+public class Module implements Cloneable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String titre;
@@ -59,5 +59,10 @@ public class Module {
             f.setEtudiant(null);
             iterator.remove();
         }
+    }
+    @Override
+    public Object clone()throws CloneNotSupportedException{
+
+        return super.clone();
     }
 }

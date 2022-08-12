@@ -41,25 +41,20 @@ public class PromotionService {
     }
     public boolean affecterStudents(List<Etudiant> etds ,Long idPromo){
         Promotion p=PromR.findById(idPromo).get();
-
         for (Etudiant e:etds){
+            Etudiant student=er.findById(e.getId()).get();
+            student.setSelec(true);
+            student=er.save(student);
             for(Semestre s:p.getNiveaux().get(0).getSemestres()){
                 for(Module m:s.getModules()) {
                     Inscription i=new Inscription();
                     i=IR.save(i);
-                    Etudiant student=er.findById(e.getId()).get();
-                    student.setSelec(true);
-                    student=er.save(student);
+                    System.out.println(student.isSelec());
                     student.addInscription(i);
                     m.addInscription(i);
-
-
-
                 }
             }
         }
-        return true;}
-
-
-
+        return true;
+    }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Diplome {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String typeDiplome;
@@ -59,4 +60,5 @@ public class Diplome {
             iterator.remove();
         }
     }
+
 }
