@@ -5,12 +5,17 @@ import com.lms.Application.dao.NiveauRepository;
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Etudiant;
 
+import com.lms.Application.entities.Inscription;
+import com.lms.Application.entities.Module;
+import com.lms.Application.entities.Promotion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -67,5 +72,11 @@ public class EtudiantService {
 
         return er.count();
     }
+
+    public Promotion getMyPromotion(Long id){
+        Etudiant e=er.findById(id).get();
+        return e.getPromotion();
+    }
+
 
 }

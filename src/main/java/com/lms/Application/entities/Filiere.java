@@ -22,7 +22,7 @@ public class Filiere {
 
     Professeur chefFiliere;
     @ManyToOne
-    @JsonIgnore
+
     Diplome diplome;
     @OneToMany(mappedBy = "filiere")
     @JsonIgnore

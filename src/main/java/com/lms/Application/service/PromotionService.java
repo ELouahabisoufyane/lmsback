@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -57,4 +58,16 @@ public class PromotionService {
         }
         return true;
     }
+
+
+    public Filiere getFiliere(Long id){
+        Promotion p=PromR.findById(id).get();
+        return p.getFiliere();
+    }
+
+
+
+
+
+
 }

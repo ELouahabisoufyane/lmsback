@@ -1,6 +1,7 @@
 package com.lms.Application.web;
 
 import com.lms.Application.entities.Etudiant;
+import com.lms.Application.entities.Filiere;
 import com.lms.Application.entities.Niveau;
 import com.lms.Application.entities.Promotion;
 import com.lms.Application.service.PromotionService;
@@ -31,5 +32,8 @@ public class ControlePromotion {
     public boolean AddDiplome(@RequestBody List<Etudiant> etds ,@PathVariable("id")Long id){
         return PS.affecterStudents(etds,id);
     }
-
+    @GetMapping("/filiere/{id}")
+    public Filiere getFiliere(@PathVariable("id")Long id){
+        return PS.getFiliere(id);
+    }
 }

@@ -2,10 +2,14 @@ package com.lms.Application.web;
 
 import com.lms.Application.dao.RoleRepository;
 import com.lms.Application.entities.Etudiant;
+import com.lms.Application.entities.Module;
+import com.lms.Application.entities.Promotion;
 import com.lms.Application.service.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/etudiant")
@@ -60,6 +64,10 @@ public class ControlerEtudiant {
         Etudiant newuser=es.addEtudiant(cl,idFiliere);
         return newuser;
     }
+    @GetMapping("/promotion/{id}")
+    public Promotion getModules(@PathVariable("id") Long id) {
+        return  es.getMyPromotion(id);
 
+    }
 
 }
