@@ -37,10 +37,9 @@ public class ControlerFiliere {
     public List<Filiere> getAll(){
         return fr.findAll();
     }
-    @PostMapping("/add/{id}")
-
-    public Filiere addFiliere(@RequestBody Filiere cl,@PathVariable("id") Long id) {
-        Filiere newuser=es.addFiliere(cl,id);
+    @PostMapping("/add/{idProf}/{idDiplome}")
+    public Filiere addFiliere(@RequestBody Filiere cl,@PathVariable("idProf") Long idProf,@PathVariable("idDiplome") Long idDiplome) {
+        Filiere newuser=es.addFiliere(cl,idProf,idDiplome);
         return newuser;
     }
 

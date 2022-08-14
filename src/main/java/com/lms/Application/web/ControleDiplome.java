@@ -14,6 +14,22 @@ import java.util.List;
 public class ControleDiplome {
     @Autowired
     DiplomeService ds;
+    @PostMapping("/addDiplome")
+    public Diplome addOne(@RequestBody Diplome d){
+       return ds.add(d);
+    }
+    @PutMapping("/updateDiplome")
+    public void updateOne(@RequestBody Diplome d){
+        ds.update(d);
+    }
+    @DeleteMapping("/deleteDiplome/{id}")
+    public void deleteOne(@PathVariable("id") Long id){
+        ds.remove(id);
+    }
+    @GetMapping("/getDiplome/{id}")
+    public void getOne(@PathVariable("id") Long id){
+        ds.getOne(id);
+    }
     @GetMapping("/getAll")
     public List<Diplome> getAll(){
         return ds.getAll();

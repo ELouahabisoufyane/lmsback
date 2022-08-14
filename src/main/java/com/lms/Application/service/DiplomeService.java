@@ -33,8 +33,12 @@ public class DiplomeService {
     }
 
 
-    public void remove(Diplome s) {
-        DR.delete(s);
+    public void remove(Long id) {
+        Diplome d=DR.findById(id).get();
+        for (Filiere f:d.getFilieres())
+            f.setDiplome(null);
+        DR.delete(DR.findById(id).get());
+
     }
 
 

@@ -19,7 +19,8 @@ public class FiliereService {
     private final NiveauRepository nr;
     private final SemestreRepository sr;
     private final SemestreService ss;
-    public FiliereService(FiliereRepository fr, ProfesseurRepository pr, PromotionRepository pr1, PromotionRepository promr, NiveauRepository nr, SemestreRepository sr, SemestreService ss) {
+    private final DiplomeRepository DR;
+    public FiliereService(FiliereRepository fr, ProfesseurRepository pr, PromotionRepository pr1, PromotionRepository promr, NiveauRepository nr, SemestreRepository sr, SemestreService ss, DiplomeRepository dr) {
         this.fr = fr;
         this.profr = pr;
         this.promr = promr;
@@ -27,8 +28,9 @@ public class FiliereService {
         this.nr = nr;
         this.sr = sr;
         this.ss = ss;
+        DR = dr;
     }
-    public Filiere addFiliere(Filiere c,Long idProf) {
+    public Filiere addFiliere(Filiere c,Long idProf,Long idDiplome) {
       if(c.getId()==null ){
             c=fr.save(c);
             if(idProf==-1 ){
@@ -38,7 +40,7 @@ public class FiliereService {
             else{
             c.setprof(profr.findById(idProf).get());}
              //c=fr.save(c);
-            return fr.save(c);
+
         }
         else{
             if(idProf==-1 ){
@@ -48,8 +50,11 @@ public class FiliereService {
             }
             else{
                 c.setprof(profr.findById(idProf).get());}
-            return fr.save(c);
+
         }
+        c=fr.save(c);
+        this.DR.findById(idDiplome).get().addFiliere(c);
+        return c;
        // return null;
     }
     public Page<Filiere> findPage(int pageNumber){

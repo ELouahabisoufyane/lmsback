@@ -19,10 +19,8 @@ public class Filiere {
     Long id;
     String titre;
     @OneToOne(mappedBy = "maFiliere")
-
     Professeur chefFiliere;
     @ManyToOne
-
     Diplome diplome;
     @OneToMany(mappedBy = "filiere")
     @JsonIgnore
