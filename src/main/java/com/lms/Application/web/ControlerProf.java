@@ -73,7 +73,7 @@ public class ControlerProf {
        return ps.getFiliere(id);
     }
     @GetMapping("/modules/{id}")
-    public List<Module> getModules(Long id){
+    public List<Module> getModules(@PathVariable("id") Long id){
         return ps.getModules(id);
     }
 }

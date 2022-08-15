@@ -57,9 +57,4 @@ public class DiplomeService {
         Diplome d= DR.findById(id).get();
         return d.getFilieres();
     }
-
-
-
-
-
 }
