@@ -19,6 +19,9 @@ public class Professeur extends User{
     @OneToMany(mappedBy = "professeur",fetch = FetchType.EAGER)
     @JsonIgnore
     List<Module> modules=new ArrayList<Module>();
+    @OneToMany(mappedBy = "enseignant",fetch = FetchType.LAZY)
+
+    private List<Element> elements=new ArrayList<>();
     @Override
     public boolean equals(Object obj) {
         if(obj == null) {
@@ -51,5 +54,15 @@ public class Professeur extends User{
             f.setProfesseur(null);
             iterator.remove();
         }
+    }
+
+    public void addElement(Element e) {
+        e.setEnseignant(this);
+        this.elements.add(e);
+    }
+
+    public void removeElement(Element e) {
+        e.setEnseignant(null);
+        elements.remove(e);
     }
 }

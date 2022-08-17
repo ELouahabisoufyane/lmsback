@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +27,8 @@ public class Module implements Cloneable{
     @OneToMany(mappedBy = "module")
     @JsonIgnore
     List<Inscription> inscrits=new ArrayList<Inscription>();
+    @OneToMany(mappedBy = "module")
+    List<Element> elements=new ArrayList<>();
 
     public boolean equals(Object obj) {
         if(obj == null) {
@@ -64,5 +68,16 @@ public class Module implements Cloneable{
     public Object clone()throws CloneNotSupportedException{
 
         return super.clone();
+    }
+
+    public void addElement(Element e) {
+        e.setModule(this);
+        this.elements.add(e);
+
+    }
+
+    public void removeElement(Element e) {
+       e.setModule(null);
+       elements.remove(e);
     }
 }
