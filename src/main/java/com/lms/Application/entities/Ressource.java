@@ -4,15 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
+import javax.persistence.*;
+import java.net.URL;
 @Data
-public class ElementFinal extends ElementComponant{
-    @Override
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+public class Ressource {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    URL url;
+    String titre;
+    @ManyToOne
+    ElementComponant elementComponant;
+
     public boolean equals(Object obj) {
         if(obj == null) {
             return false;
@@ -23,7 +28,7 @@ public class ElementFinal extends ElementComponant{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return this.getId() != null && this.getId().equals(((ElementFinal) obj).getId());
+        return this.getId() != null && this.getId().equals(((Ressource) obj).getId());
     }
     @Override
     public int hashCode() {
