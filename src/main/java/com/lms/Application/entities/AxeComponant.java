@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class ElementComponant {
+public abstract class AxeComponant {
      @Id @GeneratedValue(strategy = GenerationType.AUTO)
      Long id ;
      String Titre ;
@@ -21,7 +21,10 @@ public abstract class ElementComponant {
      String ContentHtml ;
      @ManyToOne
      @JsonIgnore
-     ElementComponant elementComponant;
+     AxeComponant axe;
+     @ManyToOne
+     @JsonIgnore
+     Element element;
      @OneToMany(mappedBy = "elementComponant")
      List<Ressource> ressources =new ArrayList<Ressource>();
 
@@ -42,4 +45,9 @@ public abstract class ElementComponant {
                iterator.remove();
           }
      }
+     public abstract void addAxe(AxeComponant p);
+     public abstract void removeAxe(AxeComponant p);
+     public abstract  void removeAllAxe();
+     public abstract List<AxeComponant> getSubAxes();
+
 }

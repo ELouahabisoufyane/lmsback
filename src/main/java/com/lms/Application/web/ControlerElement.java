@@ -1,5 +1,7 @@
 package com.lms.Application.web;
 
+import com.lms.Application.entities.Axe;
+import com.lms.Application.entities.AxeComponant;
 import com.lms.Application.entities.Element;
 import com.lms.Application.service.ElementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,10 @@ public class ControlerElement {
     public Element addElement(@RequestBody  Element e,@PathVariable("idModule") Long idModule,@PathVariable("idProf") Long idProf){
         return es.addElement(e,idModule,idProf);
     }
-
+    @PostMapping("/addAxe/{idElement}")
+    public AxeComponant addElement(@RequestBody  AxeComponant e, @PathVariable("idElement") Long idElement){
+       return es.addAxe(e,idElement);
+    }
     @DeleteMapping("/removeElement/{id}")
     public void removeElement(@PathVariable("id") Long id){
         es.removeElement(id);
@@ -31,6 +36,15 @@ public class ControlerElement {
     public List<Element> getElementsOfModule(@PathVariable("idmodule") Long idmodule){
         return es.getElementsByModule(idmodule);
     }
+    @GetMapping("/getElement/{idElement}")
+    public Element getElements(@PathVariable("idElement") Long idElement){
+        return es.GetElement(idElement);
+    }
+    @GetMapping("/getAxesByElement/{idmodule}")
+    public List<AxeComponant> getAxesByElement(@PathVariable("idElement") Long idElement){
+        return es.GetAxesByElement(idElement);
+    }
+
     @GetMapping("/getElementsOfProf/{idprof}")
     public List<Element> getElementsOfProf(@PathVariable("idprof") Long idprof){
         return es.getElementsByProf(idprof);

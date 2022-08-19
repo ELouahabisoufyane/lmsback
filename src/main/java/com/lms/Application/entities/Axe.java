@@ -1,6 +1,5 @@
 package com.lms.Application.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,28 +9,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Entity@AllArgsConstructor@NoArgsConstructor@Data
-public class Element {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    @ManyToOne()  @JsonIgnore
-    private Module module;
-    @ManyToOne()@JsonIgnore
-    private Professeur enseignant;
-    @OneToMany(mappedBy = "element")
-    @JsonIgnore
-    List<AxeComponant> subAxes=new ArrayList<AxeComponant>();
-
-    public void addAxeComponant(AxeComponant p){
-        p.setElement(this);
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Axe extends AxeComponant {
+    @OneToMany(mappedBy = "elementComponant")
+    List<AxeComponant> subAxes =new ArrayList<AxeComponant>();
+    public void addAxe(Axe p){
+        p.setAxe(this);
         this.subAxes.add(p);
     }
-    public void removeAxeComponant(AxeComponant p){
-        p.setElement(this);
+    public void removeAxe(AxeComponant p){
+        p.setAxe(null);
         this.subAxes.remove(p);
     }
-    public void removeAllAxeComponant(){
+    public void removeAllAxe(){
         Iterator<AxeComponant> iterator = this.subAxes.iterator();
         while (iterator.hasNext()) {
             AxeComponant f = iterator.next();
@@ -49,12 +42,11 @@ public class Element {
         if (getClass() != obj.getClass()) {
             return false;
         }
-
-
-        return this.getId() != null && this.getId().equals(((Element) obj).getId());
+        return this.getId() != null && this.getId().equals(((Axe) obj).getId());
     }
     @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
+
 }
