@@ -25,23 +25,23 @@ public abstract class AxeComponant {
      @ManyToOne
      @JsonIgnore
      Element element;
-     @OneToMany(mappedBy = "elementComponant")
+     @OneToMany(mappedBy = "axeComponant")
      List<Ressource> ressources =new ArrayList<Ressource>();
 
      public void addRessource(Ressource p){
 
-          p.setElementComponant(this);
+          p.setAxeComponant(this);
           this.ressources.add(p);
      }
      public void removeRessource(Ressource p){
-          p.setElementComponant(this);
+          p.setAxeComponant(this);
           this.ressources.remove(p);
      }
      public void removeRessources(){
           Iterator<Ressource> iterator = this.ressources.iterator();
           while (iterator.hasNext()) {
                Ressource f = iterator.next();
-               f.setElementComponant(null);
+               f.setAxeComponant(null);
                iterator.remove();
           }
      }
@@ -49,5 +49,4 @@ public abstract class AxeComponant {
      public abstract void removeAxe(AxeComponant p);
      public abstract  void removeAllAxe();
      public abstract List<AxeComponant> getSubAxes();
-
 }

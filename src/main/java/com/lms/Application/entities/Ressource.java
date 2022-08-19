@@ -16,7 +16,7 @@ public class Ressource {
     URL url;
     String titre;
     @ManyToOne
-    AxeComponant elementComponant;
+    AxeComponant axeComponant;
 
     public boolean equals(Object obj) {
         if(obj == null) {

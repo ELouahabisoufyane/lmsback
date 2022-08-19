@@ -14,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Axe extends AxeComponant {
-    @OneToMany(mappedBy = "elementComponant")
+    @OneToMany(mappedBy = "axe")
     List<AxeComponant> subAxes =new ArrayList<AxeComponant>();
-    public void addAxe(Axe p){
+    public void addAxe(AxeComponant p){
         p.setAxe(this);
         this.subAxes.add(p);
     }
