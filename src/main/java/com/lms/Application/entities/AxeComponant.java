@@ -16,9 +16,9 @@ import java.util.List;
 public abstract class AxeComponant {
      @Id @GeneratedValue(strategy = GenerationType.AUTO)
      Long id ;
-     String Titre ;
-     String Description ;
-     String ContentHtml ;
+     String titre ;
+     String description ;
+     String contentHtml ;
      @ManyToOne
      @JsonIgnore
      AxeComponant axe;
@@ -27,9 +27,7 @@ public abstract class AxeComponant {
      Element element;
      @OneToMany(mappedBy = "axeComponant")
      List<Ressource> ressources =new ArrayList<Ressource>();
-
      public void addRessource(Ressource p){
-
           p.setAxeComponant(this);
           this.ressources.add(p);
      }
@@ -45,8 +43,8 @@ public abstract class AxeComponant {
                iterator.remove();
           }
      }
-     public abstract void addAxe(AxeComponant p);
+     public abstract void addAxe(Axe p);
      public abstract void removeAxe(AxeComponant p);
      public abstract  void removeAllAxe();
-     public abstract List<AxeComponant> getSubAxes();
+     public abstract List<Axe> getSubAxes();
 }

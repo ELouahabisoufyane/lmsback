@@ -15,8 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Axe extends AxeComponant {
     @OneToMany(mappedBy = "axe")
-    List<AxeComponant> subAxes =new ArrayList<AxeComponant>();
-    public void addAxe(AxeComponant p){
+    List<Axe> subAxes =new ArrayList<Axe>();
+    @Override
+    public void addAxe(Axe p){
         p.setAxe(this);
         this.subAxes.add(p);
     }
@@ -25,7 +26,7 @@ public class Axe extends AxeComponant {
         this.subAxes.remove(p);
     }
     public void removeAllAxe(){
-        Iterator<AxeComponant> iterator = this.subAxes.iterator();
+        Iterator<Axe> iterator = this.subAxes.iterator();
         while (iterator.hasNext()) {
             AxeComponant f = iterator.next();
             f.setAxe(null);

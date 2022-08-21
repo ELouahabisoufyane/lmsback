@@ -52,13 +52,13 @@ public class ElementService {
         Professeur p=pr.findById(idProf).get();
         return p.getElements();
     }
-    public AxeComponant addAxe(AxeComponant ec, Long idElement){
+    public Axe addAxe(Axe ec, Long idElement){
         ec = ECR.save(ec);
         Element e=er.findById(idElement).get();
         e.addAxeComponant(ec);
         return ec;
     }
-    public List<AxeComponant> GetAxesByElement(Long idElement){
+    public List<Axe> GetAxesByElement(Long idElement){
         return er.findById(idElement).get().getSubAxes();
     }
 }

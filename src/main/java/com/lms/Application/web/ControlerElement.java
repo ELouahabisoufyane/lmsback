@@ -24,13 +24,12 @@ public class ControlerElement {
         return es.addElement(e,idModule,idProf);
     }
     @PostMapping("/addAxe/{idElement}")
-    public AxeComponant addElement(@RequestBody  AxeComponant e, @PathVariable("idElement") Long idElement){
+    public Axe addElement(@RequestBody  Axe e, @PathVariable("idElement") Long idElement){
        return es.addAxe(e,idElement);
     }
     @DeleteMapping("/removeElement/{id}")
     public void removeElement(@PathVariable("id") Long id){
         es.removeElement(id);
-
     }
     @GetMapping("/getElementsOfModule/{idmodule}")
     public List<Element> getElementsOfModule(@PathVariable("idmodule") Long idmodule){
@@ -40,11 +39,10 @@ public class ControlerElement {
     public Element getElements(@PathVariable("idElement") Long idElement){
         return es.GetElement(idElement);
     }
-    @GetMapping("/getAxesByElement/{idmodule}")
-    public List<AxeComponant> getAxesByElement(@PathVariable("idElement") Long idElement){
+    @GetMapping("/getAxesByElement/{idElement}")
+    public List<Axe> getAxesByElement(@PathVariable("idElement") Long idElement){
         return es.GetAxesByElement(idElement);
     }
-
     @GetMapping("/getElementsOfProf/{idprof}")
     public List<Element> getElementsOfProf(@PathVariable("idprof") Long idprof){
         return es.getElementsByProf(idprof);

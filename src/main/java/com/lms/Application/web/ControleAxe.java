@@ -1,4 +1,5 @@
 package com.lms.Application.web;
+import com.lms.Application.entities.Axe;
 import com.lms.Application.entities.AxeComponant;
 import com.lms.Application.entities.Ressource;
 import com.lms.Application.service.AxeService;
@@ -12,7 +13,7 @@ public class ControleAxe {
     @Autowired
     AxeService As;
     @PostMapping("/addAxe/{idAxe}")
-    public AxeComponant addAxe(@RequestBody AxeComponant ac,@PathVariable("idAxe")Long idAxe){
+    public AxeComponant addAxe(@RequestBody Axe ac, @PathVariable("idAxe")Long idAxe){
         return As.addAxe(ac,idAxe);
     }
     @GetMapping("/getOne/{idAxe}")
@@ -28,7 +29,7 @@ public class ControleAxe {
         As.updateAxe(ac);
     }
     @GetMapping("/getAxes/{idAxe}")
-    public List<AxeComponant> getAxesById(@PathVariable("idAxe")Long idAxe){
+    public List<Axe> getAxesById(@PathVariable("idAxe")Long idAxe){
         return As.getAxesById(idAxe);
     }
     @GetMapping("/getRessources/{idAxe}")

@@ -23,7 +23,7 @@ public class AxeService {
     public AxeComponant getAxe(Long id){
       return  ACR.findById(id).get();
     }
-    public AxeComponant addAxe(AxeComponant ec , Long idAxe){
+    public Axe addAxe(Axe ec , Long idAxe){
         ec=ACR.save(ec);
        AxeComponant a= ACR.findById(idAxe).get();
        a.addAxe(ec);
@@ -41,7 +41,7 @@ public class AxeService {
     public void updateAxe(AxeComponant ac ){
         ACR.save(ac);
     }
-    public List<AxeComponant> getAxesById(Long id){
+    public List<Axe> getAxesById(Long id){
         return  ACR.findById(id).get().getSubAxes();
     }
     public List<Ressource> getRessourcesById(Long id){

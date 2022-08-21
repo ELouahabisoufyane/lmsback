@@ -21,9 +21,8 @@ public class Element {
     private Professeur enseignant;
     @OneToMany(mappedBy = "element")
     @JsonIgnore
-    List<AxeComponant> subAxes=new ArrayList<AxeComponant>();
-
-    public void addAxeComponant(AxeComponant p){
+    List<Axe> subAxes=new ArrayList<Axe>();
+    public void addAxeComponant(Axe p){
         p.setElement(this);
         this.subAxes.add(p);
     }
@@ -32,7 +31,7 @@ public class Element {
         this.subAxes.remove(p);
     }
     public void removeAllAxeComponant(){
-        Iterator<AxeComponant> iterator = this.subAxes.iterator();
+        Iterator<Axe> iterator = this.subAxes.iterator();
         while (iterator.hasNext()) {
             AxeComponant f = iterator.next();
             f.setAxe(null);
@@ -49,8 +48,6 @@ public class Element {
         if (getClass() != obj.getClass()) {
             return false;
         }
-
-
         return this.getId() != null && this.getId().equals(((Element) obj).getId());
     }
     @Override
