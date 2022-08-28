@@ -6,15 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.Date;
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ressource {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    URL url;
-    String titre;
+    private Long id;
+    private String titre;
+    private String lien;
+    private String intitule;
+    private String description;
+    private Date dateEnLigne;
+    private int numero;
+
     @ManyToOne
     AxeComponant axeComponant;
 
