@@ -26,6 +26,7 @@ public abstract class AxeComponant {
      @JsonIgnore
      Element element;
      @OneToMany(mappedBy = "axeComponant")
+
      List<Ressource> ressources =new ArrayList<Ressource>();
      public void addRessource(Ressource p){
           p.setAxeComponant(this);
