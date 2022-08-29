@@ -8,6 +8,7 @@ import com.lms.Application.entities.Module;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 @Transactional
@@ -60,5 +61,17 @@ public class ElementService {
     }
     public List<Axe> GetAxesByElement(Long idElement){
         return er.findById(idElement).get().getSubAxes();
+    }
+    public Professeur getProf(Long idElement){
+        Element e=er.findById(idElement).get();
+        return e.getEnseignant();
+    }
+    public List<Etudiant> getEtudents(Long idElement){
+        List<Etudiant> ets= new ArrayList<>();
+        Element e=er.findById(idElement).get();
+        e.getModule().getInscrits().forEach((i)->{
+            ets.add(i.getEtudiant());
+        });
+        return ets;
     }
 }

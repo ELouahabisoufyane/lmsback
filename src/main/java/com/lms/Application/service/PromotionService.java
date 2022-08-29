@@ -64,7 +64,17 @@ public class PromotionService {
         Promotion p=PromR.findById(id).get();
         return p.getFiliere();
     }
+    public List<Etudiant> getEtudensInscrits(Long id){
+        List<Etudiant> ets= new ArrayList<>();
+        Promotion p=PromR.findById(id).get();
+        p.getEtudiants().forEach((e)->{
+            if(e.isSelec()){
+                ets.add(e);
+            }
+        });
 
+        return ets;
+    }
 
 
 

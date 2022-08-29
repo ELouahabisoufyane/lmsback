@@ -1,8 +1,10 @@
 package com.lms.Application.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -12,17 +14,26 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "files")
 public class Ressource {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String titre;
-    private String lien;
-    private String intitule;
-    private String description;
-    private Date dateEnLigne;
-    private int numero;
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+
+    private String id;
+    private String name;
+    private String type;
+    @Lob
+    private byte[] data;
+    public Ressource(String name, String type, byte[] data) {
+        this.name = name;
+        this.type = type;
+        this.data = data;
+    }
 
     @ManyToOne
+            @JsonIgnore
     AxeComponant axeComponant;
 
     public boolean equals(Object obj) {

@@ -1,12 +1,11 @@
 package com.lms.Application.web;
 
-import com.lms.Application.entities.Axe;
-import com.lms.Application.entities.AxeComponant;
-import com.lms.Application.entities.Element;
+import com.lms.Application.entities.*;
 import com.lms.Application.service.ElementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,5 +45,14 @@ public class ControlerElement {
     @GetMapping("/getElementsOfProf/{idprof}")
     public List<Element> getElementsOfProf(@PathVariable("idprof") Long idprof){
         return es.getElementsByProf(idprof);
+    }
+    @GetMapping("/getProf/{idElement}")
+    public Professeur getProf(@PathVariable("idElement") Long idElement){
+
+        return es.getProf(idElement);
+    }
+    @GetMapping("/getEtudiants/{idElement}")
+    public List<Etudiant> getEtudents(@PathVariable("idElement")Long idElement){
+       return es.getEtudents(idElement);
     }
 }

@@ -3,5 +3,10 @@ package com.lms.Application.dao;
 import com.lms.Application.entities.Ressource;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RessourceRepository extends JpaRepository<Ressource,Long> {
+import java.util.List;
+
+
+public interface RessourceRepository extends JpaRepository<Ressource, String> {
+
+
 }
