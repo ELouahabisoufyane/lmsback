@@ -78,6 +78,5 @@ public class AxeService {
         AxeComponant a=ACR.findById(id).get();
         a.setContentHtml(content);
         ACR.save(a);
-
     }
 }
