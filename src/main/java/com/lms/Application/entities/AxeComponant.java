@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class AxeComponant {
-     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+     @Id @GeneratedValue
      Long id ;
      String titre ;
      String description ;

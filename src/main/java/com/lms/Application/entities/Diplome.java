@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Diplome {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     Long id;
     String typeDiplome;
     int indece;

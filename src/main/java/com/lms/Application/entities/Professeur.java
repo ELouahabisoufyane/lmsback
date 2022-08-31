@@ -20,7 +20,6 @@ public class Professeur extends User{
     @JsonIgnore
     List<Module> modules=new ArrayList<Module>();
     @OneToMany(mappedBy = "enseignant",fetch = FetchType.LAZY)
-
     private List<Element> elements=new ArrayList<>();
     @Override
     public boolean equals(Object obj) {

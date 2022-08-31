@@ -15,7 +15,7 @@ import java.util.*;
 @Data
 public class Filiere {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     Long id;
     String titre;
     @OneToOne(mappedBy = "maFiliere")

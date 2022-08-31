@@ -15,7 +15,7 @@ import java.util.Locale;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Promotion {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     Long id;
     String anneeUniv= String.valueOf(LocalDate.now().getYear())+"/"+String.valueOf(LocalDate.now().getYear()+1);
     @ManyToOne

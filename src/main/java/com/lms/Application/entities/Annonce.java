@@ -1,31 +1,25 @@
 package com.lms.Application.entities;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Inscription {
+public class Annonce {
     @Id @GeneratedValue
-    int Id;
-    String anneeUniv= String.valueOf(LocalDate.now().getYear())+"/"+String.valueOf(LocalDate.now().getYear())+1;
-    int score;
-
-    @ManyToOne
+    Long id;
+    String contentHtml;
+    String date=LocalDate.now().toString();
+    @ManyToOne()
+    User creator;
+    @ManyToOne()
     @JsonIgnore
-    Module module;
-    @ManyToOne
-    @JsonIgnore
-    Etudiant etudiant;
-
-
+    Element element;
 }

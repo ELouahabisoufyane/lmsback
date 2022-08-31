@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity@AllArgsConstructor@NoArgsConstructor@Data
 public class Element {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id@GeneratedValue
     private Long id;
     private String name;
     @ManyToOne()  @JsonIgnore
@@ -22,12 +22,15 @@ public class Element {
     @OneToMany(mappedBy = "element")
     @JsonIgnore
     List<Axe> subAxes=new ArrayList<Axe>();
+    @OneToMany(mappedBy = "element")
+            @JsonIgnore
+    List<Annonce> annonces=new ArrayList<>();
     public void addAxeComponant(Axe p){
         p.setElement(this);
         this.subAxes.add(p);
     }
     public void removeAxeComponant(AxeComponant p){
-        p.setElement(this);
+        p.setElement(null);
         this.subAxes.remove(p);
     }
     public void removeAllAxeComponant(){
@@ -35,6 +38,22 @@ public class Element {
         while (iterator.hasNext()) {
             AxeComponant f = iterator.next();
             f.setAxe(null);
+            iterator.remove();
+        }
+    }
+    public void addAnnonce(Annonce a){
+        a.setElement(this);
+        this.annonces.add(a);
+    }
+    public void removeAnnoce(Annonce a){
+        a.setElement(null);
+        this.annonces.remove(a);
+    }
+    public void removeAnnonces(){
+        Iterator<Annonce> iterator = this.annonces.iterator();
+        while (iterator.hasNext()) {
+            Annonce f = iterator.next();
+            f.setElement(null);
             iterator.remove();
         }
     }

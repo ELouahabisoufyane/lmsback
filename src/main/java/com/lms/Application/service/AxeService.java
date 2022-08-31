@@ -26,7 +26,6 @@ public class AxeService {
     ElementRepository ER;
     @Autowired
     RessourceRepository ressourceRepository;
-
     public AxeComponant getAxe(Long id){
       return  ACR.findById(id).get();
     }
@@ -36,7 +35,6 @@ public class AxeService {
        a.addAxe(ec);
        return ec;
     }
-
     public void removeAxe(Long idAxe){
        AxeComponant ac=ACR.findById(idAxe).get();
        if(ac.getElement()!=null){
@@ -52,9 +50,6 @@ public class AxeService {
     public List<Axe> getAxesById(Long id){
         return  ACR.findById(id).get().getSubAxes();
     }
-
-
-
     public Ressource addRessource(MultipartFile file , Long idAxe) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Ressource ec = new Ressource(fileName, file.getContentType(), file.getBytes());

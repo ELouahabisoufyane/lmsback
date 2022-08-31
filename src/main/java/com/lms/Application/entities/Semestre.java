@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Semestre {
-    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id  @GeneratedValue
     Long id;
     String titre;
     int indece ;

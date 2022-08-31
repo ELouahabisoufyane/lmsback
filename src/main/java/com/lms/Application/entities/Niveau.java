@@ -19,7 +19,7 @@ import java.util.*;
 @Data
 public class Niveau {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     Long Id;
     String titre;
     int level;
